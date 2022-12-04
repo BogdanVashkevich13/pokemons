@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pokemons/Pages/home_page.dart';
-import 'package:pokemons/Pages/pokemons_list.dart';
+
+import 'Pages/home_page.dart';
+import 'Pages/pokemons_infomation.dart';
+
 
 void main()  {
   runApp(const MyApp());
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
        initialRoute: '/',
       routes: {
           '/' :(BuildContext context) => const HomePage(),
-        '/PokemonList': (BuildContext context) => const PokeList(),
+        '/PokeInfo' :(BuildContext context) => const PokemonInfomation(),
       },
     );
   }

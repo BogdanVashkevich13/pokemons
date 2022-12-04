@@ -1,63 +1,54 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pokemons/Pokemons%20Bloc/pokemons_bloc.dart';
-import 'package:pokemons/Pokemons%20Bloc/pokemons_state.dart';
-
 import '../Colors/colors.dart';
 
-class PokeList extends StatefulWidget {
-  const PokeList({Key? key}) : super(key: key);
+class PokemonsList extends StatefulWidget {
+  const PokemonsList({Key? key}) : super(key: key);
 
   @override
-  State<PokeList> createState() => _PokeListState();
+  State<PokemonsList> createState() => _PokemonsListState();
 }
 
-class _PokeListState extends State<PokeList> {
+class _PokemonsListState extends State<PokemonsList> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PokemonBloc, PokemonState>(
-        builder: (context, state) {
-          if (state is PokemonLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is Pokemonloadedstate) {
-            return GridView.builder(
-                //itemCount: state.loadedPokemons.length,
-                gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemBuilder: (context, index ){
-                  return Card(
-                    child: GridTile(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 5,),
-                          Image.asset('images/pokemon.png'),
-                          SizedBox(height: 5,),
-                          Text('${state.loadedPokemons[index].name}')
-                        ],
-                      ),
-                    ),
-                  );
+    return  Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: ColorsSet.blue,
+        title: Text('List Pokemons',
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              color: ColorsSet.white,
+              fontSize: 25,
+            ),
+          ),
+        ),
+      ),
+      body:  GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3
+          ),
+          itemBuilder: (context, index) =>
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, '/PokeInfo');
                 },
-            );
-          }
-          if (state is PokemonErrorState) {
-            return const Center(
-              child: Text('Error'),
-            );
-          }
-          return const SizedBox.shrink();
-        });
+                child: Card(
+                  child: GridTile(
+                      child: Column(
+                        children:<Widget> [
+                          SizedBox(height: 5,),
+                          Image.asset('images/pokemon.png', height: 80, width: 80,),
+                          SizedBox(height: 10,),
+                          Text('Pokemon Name')
+                        ],
+                      )
+                  ),
+                ),
+              )
+      ),
+      );
   }
 }
-
-
-
-
-
