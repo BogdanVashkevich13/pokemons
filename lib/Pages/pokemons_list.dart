@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pokemons/Pokemon_Bloc/pokemon_bloc.dart';
+import 'package:pokemons/Pokemon_Bloc/pokemon_bloc_state.dart';
 import '../Colors/colors.dart';
 
 class PokemonsList extends StatefulWidget {
@@ -26,29 +29,46 @@ class _PokemonsListState extends State<PokemonsList> {
           ),
         ),
       ),
-      body:  GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3
-          ),
-          itemBuilder: (context, index) =>
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, '/PokeInfo');
-                },
-                child: Card(
-                  child: GridTile(
-                      child: Column(
-                        children:<Widget> [
-                          SizedBox(height: 5,),
-                          Image.asset('images/pokemon.png', height: 80, width: 80,),
-                          SizedBox(height: 10,),
-                          Text('Pokemon Name')
-                        ],
-                      )
-                  ),
+
+      body: BlocBuilder<PokemonBloc, PokemonState>(
+        builder: (context, state) {
+          if (state is PokemonLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is PokemonLoadedState) {
+            return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3
                 ),
-              )
+                itemBuilder: (context, index) =>
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/PokeInfo');
+                      },
+                      child: Card(
+                        child: GridTile(
+                            child: Column(
+                              children:<Widget> [
+                                SizedBox(height: 5,),
+                                Image.network(state.pokemon[index].imageUrl),
+                                SizedBox(height: 10,),
+                                Text(state.pokemon[index].name)
+                              ],
+                            )
+                        ),
+                      ),
+                    )
+            );
+          } else if (state is PokemonErrorState) {
+            return Center(
+              child: Text('Error'),
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
       ),
-      );
+    );
   }
 }

@@ -1,2 +1,4 @@
-abstract class PokemonsEvent{}
-class PokemonsLoadEvent extends PokemonsEvent {}
+
+// abstract class PokemonEvent{}
+//
+// class PokemonLoadEvent extends PokemonEvent {}
