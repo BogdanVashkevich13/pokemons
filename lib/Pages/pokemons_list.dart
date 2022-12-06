@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pokemons/Pokemon_Bloc/Cubit/navigation_cubit.dart';
 import 'package:pokemons/Pokemon_Bloc/pokemon_bloc.dart';
 import 'package:pokemons/Pokemon_Bloc/pokemon_bloc_state.dart';
 import '../Colors/colors.dart';
@@ -41,18 +42,18 @@ class _PokemonsListState extends State<PokemonsList> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3
                 ),
+                itemCount: state.pokemon.length,
                 itemBuilder: (context, index) =>
                     InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/PokeInfo');
-                      },
+                      onTap: () => BlocProvider.of<NavigationCubit>(context)
+                          .showPokemonDetails(state.pokemon[index].id),
                       child: Card(
                         child: GridTile(
                             child: Column(
                               children:<Widget> [
                                 SizedBox(height: 5,),
-                                Image.network(state.pokemon[index].imageUrl),
-                                SizedBox(height: 10,),
+                                Image.network(state.pokemon[index].imageUrl, height: 80, width: 80,),
+                                SizedBox(height: 5,),
                                 Text(state.pokemon[index].name)
                               ],
                             )
