@@ -1,75 +1,59 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:pokemons/Pokemon_Bloc/Cubit/navigation_cubit.dart';
-import 'package:pokemons/Pokemon_Bloc/pokemon_bloc.dart';
-import 'package:pokemons/Pokemon_Bloc/pokemon_bloc_state.dart';
-import '../Colors/colors.dart';
+import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc.dart';
+import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc_event.dart';
+import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc_state.dart';
+import 'package:pokemons/Data/pokemon_repository.dart';
+import 'package:pokemons/Pages/pokemon_details.dart';
+import 'package:pokemons/Wigets/pokemon_cell.dart';
 
-class PokemonsList extends StatefulWidget {
-  const PokemonsList({Key? key}) : super(key: key);
+import '../Data/pokemon.dart';
+
+class PokemonList extends StatefulWidget {
+  const PokemonList({Key? key}) : super(key: key);
 
   @override
-  State<PokemonsList> createState() => _PokemonsListState();
+  State<PokemonList> createState() => _PokeDex();
 }
 
-class _PokemonsListState extends State<PokemonsList> {
+class _PokeDex extends State<PokemonList> {
+  final ScrollController _scrollController = ScrollController();
+  final List<PokemonModel> pokemonList = [];
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: ColorsSet.blue,
-        title: Text('List Pokemons',
-          style: GoogleFonts.lato(
-            textStyle: const TextStyle(
-              color: ColorsSet.white,
-              fontSize: 25,
-            ),
-          ),
+    return BlocProvider(
+        create: (context) => PokemonBloc(repository: PokemonRepository())..add(LoadPokemonEvent()),
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Pokemon List'),
         ),
-      ),
-
-      body: BlocBuilder<PokemonBloc, PokemonState>(
-        builder: (context, state) {
-          if (state is PokemonLoadingState) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is PokemonLoadedState) {
-            return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3
-                ),
-                itemCount: state.pokemon.length,
-                itemBuilder: (context, index) =>
-                    InkWell(
-                      onTap: () => BlocProvider.of<NavigationCubit>(context)
-                          .showPokemonDetails(state.pokemon[index].id),
-                      child: Card(
-                        child: GridTile(
-                            child: Column(
-                              children:<Widget> [
-                                SizedBox(height: 5,),
-                                Image.network(state.pokemon[index].imageUrl, height: 80, width: 80,),
-                                SizedBox(height: 5,),
-                                Text(state.pokemon[index].name)
-                              ],
-                            )
-                        ),
-                      ),
-                    )
-            );
-          } else if (state is PokemonErrorState) {
-            return Center(
-              child: Text('Error'),
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
-        },
+        body: LayoutBuilder(
+            builder: (context, constrains){
+              final double maxWidth = constrains.maxWidth;
+              return BlocBuilder<PokemonBloc, PokemonState>(
+                  builder: (context, state) {
+                    if (state is PokemonEmptyState ||
+                        state is PokemonLoadingState && pokemonList.isEmpty) {
+                      return const Center(
+                          child: CircularProgressIndicator()
+                      );
+                    } else if (state is PokemonErrorState && pokemonList.isEmpty) {
+                      return const Center(
+                          child: Text(
+                              'Failed To Load Internet'
+                              ));
+                    } else if (state is PokemonLoadedState) {
+                      pokemonList.addAll(state.pokemon);
+                    }
+                    return PokemonCell(pokemonList: pokemonList, maxWidth: maxWidth);
+                  },
+              );
+            }),
       ),
     );
   }
 }
+
+
