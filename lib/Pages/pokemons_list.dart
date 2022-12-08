@@ -18,8 +18,8 @@ class PokemonList extends StatefulWidget {
 }
 
 class _PokeDex extends State<PokemonList> {
-  final ScrollController _scrollController = ScrollController();
   final List<PokemonModel> pokemonList = [];
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

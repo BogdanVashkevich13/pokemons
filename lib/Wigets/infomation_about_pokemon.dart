@@ -14,34 +14,46 @@ class PokemonInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.only(left: 30, right: 30, top: 100, bottom: 100),
-          child: Card(
-            child: Center(
-              child:  Column(
-                children: [
-                  SizedBox(height: 100,),
-                  Text('${pokemon.weight}'),
-                  Text('${pokemon.weight}'),
-                  Text('${pokemon.weight}'),
-                  Text('${pokemon.weight}'),
-                  Text('Height ${pokemon.weight}'),
-                  Text('Height ${pokemon.weight}'),
-                ],
-              ),
-            ),
-          ),
+        Stack(
+          children: [
+             Image.network(pokemon.sprites.frontDefault, ),
+          ],
         ),
-        Container(
-          padding: EdgeInsets.only(top: 25),
-          child: Align(
-            alignment: Alignment.topCenter,
-            child:Image.network(pokemon.sprites.frontDefault),
-          ),
-        )
+        Text(pokemon.name.toUpperCase()),
+        SizedBox(height: 10,),
+        Text('Types: ${pokemon.types[0].type.name}'),
+        SizedBox(height: 10,),
+        Text('Weight: ${pokemon.weight} cm'),
+        SizedBox(height: 10,),
+        Text('Height: ${pokemon.height} kg'),
       ],
     );
   }
 }
+// Stack(
+// children: [
+// Padding(
+// padding: EdgeInsets.only(left: 30, right: 30, top: 5, ),
+// child: Center(
+// child:Image.network(pokemon.sprites.frontDefault, height: 200, width: 200,)
+// )
+// ),
+// Center(
+// child:  Column(
+// children: [
+// SizedBox(height: 50,),
+// Text(pokemon.name.toUpperCase()),
+// SizedBox(height: 10,),
+// Text('Types: ${pokemon.types[0].type.name}'),
+// SizedBox(height: 10,),
+// Text('Weight: ${pokemon.weight} cm'),
+// SizedBox(height: 10,),
+// Text('Height: ${pokemon.height} kg'),
+// ],
+// ),
+// ),
+// ],
+// );

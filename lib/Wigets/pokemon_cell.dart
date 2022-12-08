@@ -11,7 +11,6 @@ class PokemonCell extends StatelessWidget {
 
   final List<PokemonModel> pokemonList;
   final double maxWidth;
-
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -19,7 +18,7 @@ class PokemonCell extends StatelessWidget {
     return GridView.builder(
       controller: _scrollController,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3
+          crossAxisCount: 2
       ),
       itemBuilder: (context, index) {
         final pokemon = pokemonList[index];
@@ -39,9 +38,9 @@ class PokemonCell extends StatelessWidget {
                   child: GridTile(
                       child: Column(
                         children: <Widget> [
-                          SizedBox(height: 0,),
+                          SizedBox(height: 10,),
                           Image.network(pokemonList[index].sprites.frontDefault),
-                          SizedBox(height: 0,),
+                          SizedBox(height: 10,),
                           Text(pokemonList[index].name.toUpperCase())
                         ],
                       )
@@ -51,7 +50,7 @@ class PokemonCell extends StatelessWidget {
           ),
         );
       }
-
     );
   }
 }
+

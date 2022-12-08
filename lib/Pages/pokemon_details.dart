@@ -19,8 +19,11 @@ final PokemonModel pokemon;
       create: (context) => PokemonSpeciesBloc(repository: PokemonRepository())
         ..add(LoadPokemonSpeciesEvent(id: pokemon.id)),
       child: Scaffold(
+        backgroundColor: ColorsSet.mint,
           extendBodyBehindAppBar: true,
           appBar: AppBar(
+            centerTitle: true,
+            title: const Text('Pokemon Details'),
             automaticallyImplyLeading: true,
           ),
           body: LayoutBuilder(builder: (context, constraints) {
