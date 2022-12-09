@@ -40,7 +40,6 @@ dependencies:
   flutter_bloc: ^8.1.0
   http: ^0.13.5
   cached_network_image: ^3.2.3
-  google_fonts: ^3.0.1
   expandable: ^5.0.1
   dio: ^4.0.6
   equatable: ^2.0.5
@@ -48,6 +47,7 @@ dependencies:
   flutter_launcher_icons: ^0.11.0
   path_provider: ^2.0.11
   sqflite: ^2.2.2
+  google_fonts: ^3.0.1
 
 
 dev_dependencies:

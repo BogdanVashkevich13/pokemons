@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Pages/home_page.dart';
 import 'Pages/pokemon_details.dart';
-
+import 'package:pokemons/Colors/colors.dart';
 
 void main()  {
   runApp(const MyApp());
@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Pokemons',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.amber,
-      // ),
+      theme: ThemeData(
+        primaryColor: Colors.black
+      ),
        initialRoute: '/',
       routes: {
           '/' :(BuildContext context) => const HomePage(),

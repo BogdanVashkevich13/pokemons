@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc.dart';
 import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc_event.dart';
 import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc_state.dart';
+import 'package:pokemons/Colors/colors.dart';
 import 'package:pokemons/Data/pokemon_repository.dart';
 import 'package:pokemons/Pages/pokemon_details.dart';
 import 'package:pokemons/Wigets/pokemon_cell.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../Data/pokemon.dart';
 
 class PokemonList extends StatefulWidget {
@@ -91,6 +92,7 @@ class _PokeDex extends State<PokemonList> {
         PokemonBloc(repository: PokemonRepository())
           ..add(LoadPokemonEvent()),
         child: Scaffold(
+          backgroundColor: ColorsSet.red,
           appBar: AppBar(
             actions:<Widget> [
               IconButton(
@@ -99,7 +101,15 @@ class _PokeDex extends State<PokemonList> {
               ),
             ],
             centerTitle: true,
-            title: const Text('Pokemon List'),
+            backgroundColor: ColorsSet.black,
+            title: Text('Pokemon List',
+              style: GoogleFonts.lato(
+                textStyle:  const TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
+              ),
+            ),
           ),
           body: LayoutBuilder(
               builder: (context, constrains) {
@@ -108,14 +118,50 @@ class _PokeDex extends State<PokemonList> {
                     if (state is PokemonEmptyState ||
                         state is PokemonLoadingState && pokemonList.isEmpty) {
                       return const Center(
-                          child: CircularProgressIndicator()
+                          child: CircularProgressIndicator(
+                            color: ColorsSet.black,
+                          )
                       );
                     } else
                     if (state is PokemonErrorState && pokemonList.isEmpty) {
-                      return const Center(
-                          child: Text(
-                              'Failed To Load Internet'
-                          ));
+                      return Center(
+                        child:  Card(
+                          elevation: 25,
+                          color: ColorsSet.white,
+                          child: Container(
+                            height: 450,
+                            width: 300,
+                            // color: Colors.red,
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 35,),
+                                Image.asset('images/error.png', height: 250, width: 250,),
+                                const SizedBox(height: 30,),
+                                Text('Fail To Load Internet',
+                                  style: GoogleFonts.lato(
+                                    textStyle:  const TextStyle(
+                                      color: ColorsSet.black,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 30,),
+                                ElevatedButton(
+                                    onPressed: () {
+                                  BlocProvider.of<PokemonBloc>(context).add(LoadPokemonEvent());
+                                 }, child: const Text('Retry',
+                                // style: GoogleFonts.lato(
+                                //   textStyle: TextStyle(
+                                //     color: Colors.white,
+                                //     fontSize: 15,
+                                //   )
+                                // ),
+                                ))
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
                     } else if (state is PokemonLoadedState) {
                       pokemonList.addAll(state.pokemon);
                     }
@@ -137,16 +183,17 @@ class _PokeDex extends State<PokemonList> {
                                     ),
                                   );
                                 },
-                                child: Padding(padding: EdgeInsets.all(5),
+                                child: Padding(padding: const EdgeInsets.all(5),
                                   child: Card(
+                                    color: ColorsSet.white,
                                     child: GridTile(
                                         child: Column(
                                           children: <Widget>[
-                                            SizedBox(height: 10,),
+                                            const SizedBox(height: 10,),
                                             Image.network(
                                                 pokemonList[index].sprites
                                                     .frontDefault),
-                                            SizedBox(height: 10,),
+                                            const SizedBox(height: 10,),
                                             Text(pokemonList[index].name
                                                 .toUpperCase())
                                           ],
@@ -166,7 +213,7 @@ class _PokeDex extends State<PokemonList> {
     }
     void scrolUp(){
     final double start = 0;
-    _scrollController.animateTo(start, duration: const Duration(seconds: 3), curve: Curves.easeIn);
+    _scrollController.animateTo(start, duration: const Duration(seconds: 1), curve: Curves.easeIn);
     }
   }
 

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:pokemons/Colors/colors.dart';
 import '../Data/pokemon.dart';
 import '../Data/pokemon_species.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PokemonInformation extends StatelessWidget {
   const PokemonInformation({Key? key,
@@ -14,37 +15,50 @@ class PokemonInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Stack(
-          children: [
-             Image.network(pokemon.sprites.frontDefault, ),
-          ],
-        ),
-        Text(pokemon.name.toUpperCase()),
-        SizedBox(height: 10,),
-        Text('Types: ${pokemon.types[0].type.name}'),
-        SizedBox(height: 10,),
-        Text('Weight: ${pokemon.weight} cm'),
-        SizedBox(height: 10,),
-        Text('Height: ${pokemon.height} kg'),
-      ],
+    return Padding(
+        padding: EdgeInsets.only(top: 200),
+      child: Center(
+        child: Container(
+          height: 250,
+          width: 250,
+          child: Card(
+            elevation: 25,
+            color: ColorsSet.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Stack(
+                  children: [
+                    Image.network(pokemon.sprites.frontDefault, ),
+                  ],
+                ),
+                Text(pokemon.name.toUpperCase()),
+                SizedBox(height: 10,),
+                Text('Types: ${pokemon.types[0].type.name}'),
+                SizedBox(height: 10,),
+                Text('Weight: ${pokemon.weight} cm'),
+                SizedBox(height: 10,),
+                Text('Height: ${pokemon.height} kg'),
+              ],
+            ),
+          ),
+        )
+      ),
     );
   }
 }
+
+
+// Card(
+// color: ColorsSet.white,
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.start,
+// children: [
 // Stack(
 // children: [
-// Padding(
-// padding: EdgeInsets.only(left: 30, right: 30, top: 5, ),
-// child: Center(
-// child:Image.network(pokemon.sprites.frontDefault, height: 200, width: 200,)
-// )
+// Image.network(pokemon.sprites.frontDefault, ),
+// ],
 // ),
-// Center(
-// child:  Column(
-// children: [
-// SizedBox(height: 50,),
 // Text(pokemon.name.toUpperCase()),
 // SizedBox(height: 10,),
 // Text('Types: ${pokemon.types[0].type.name}'),
@@ -54,6 +68,4 @@ class PokemonInformation extends StatelessWidget {
 // Text('Height: ${pokemon.height} kg'),
 // ],
 // ),
-// ),
-// ],
 // );

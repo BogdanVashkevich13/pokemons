@@ -17,7 +17,7 @@ class PokemonRepository extends InterfacePokemonRepository {
       // Options myOptions = buildCacheOptions(const Duration(days: 30), forceRefresh: true);
       // dio.interceptors.add(dioCacheManager.interceptor);
 
-      Response response = await dio.get('$_baseApi?limit=100000&offset=0',
+      Response response = await dio.get('$_baseApi?limit=10&offset=0',
       // options: myOptions
       );
 

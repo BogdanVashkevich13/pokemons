@@ -19,62 +19,40 @@ final PokemonModel pokemon;
       create: (context) => PokemonSpeciesBloc(repository: PokemonRepository())
         ..add(LoadPokemonSpeciesEvent(id: pokemon.id)),
       child: Scaffold(
-        backgroundColor: ColorsSet.mint,
+        backgroundColor: ColorsSet.red,
           extendBodyBehindAppBar: true,
           appBar: AppBar(
+            backgroundColor: ColorsSet.black,
             centerTitle: true,
             title: const Text('Pokemon Details'),
             automaticallyImplyLeading: true,
           ),
           body: LayoutBuilder(builder: (context, constraints) {
-            final double maxWidth = constraints.maxWidth;
-
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Stack(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 95),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                          ]),
-                    ),
-                  ]),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(20.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(40.0),
-                        child: BlocBuilder<PokemonSpeciesBloc,
-                            PokemonSpeciesState>(builder: (context, state) {
-                          if (state is PokemonSpeciesEmptyState || state is PokemonSpeciesLoadingState) {
-                            return const Center(
-                                child: CircularProgressIndicator(
-                                  color: ColorsSet.red,
-                                ));
-                          } else if (state is PokemonSpeciesErrorState) {
-                            return Center(
-                                child: Text(
-                                  'Failed To Load Internet'
-                                    ));
-                          } else if (state is PokemonSpeciesLoadedState) {
-                            final pokemonSpecies = state.pokemon;
+                  BlocBuilder<PokemonSpeciesBloc,
+                      PokemonSpeciesState>(builder: (context, state) {
+                    if (state is PokemonSpeciesEmptyState || state is PokemonSpeciesLoadingState) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                            color: ColorsSet.black,
+                          ));
+                    } else if (state is PokemonSpeciesErrorState) {
+                      return Center(
+                          child: Text(
+                              'Failed To Load Internet'
+                          ));
+                    } else if (state is PokemonSpeciesLoadedState) {
+                      final pokemonSpecies = state.pokemon;
 
-                            return PokemonInformation(
-                              pokemon: pokemon,
-                              pokemonSpecies: pokemonSpecies,
-                            );
-                          }
-                          return const Center();
-                        }),
-                      ),
-                    ),
-                  ),
+                      return PokemonInformation(
+                        pokemon: pokemon,
+                        pokemonSpecies: pokemonSpecies,
+                      );
+                    }
+                    return const Center();
+                  }),
                 ],
               ),
             );
