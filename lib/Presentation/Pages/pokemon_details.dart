@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemons/Bloc/Pokemon_Species_Bloc/pokemon_species_event.dart';
 import 'package:pokemons/Data/pokemon.dart';
 import 'package:pokemons/Data/pokemon_repository.dart';
-import 'package:pokemons/Wigets/infomation_about_pokemon.dart';
-import '../Bloc/Pokemon_Species_Bloc/pokemon_species_state.dart';
-import '../Bloc/Pokemon_Species_Bloc/pokemon_spevies_bloc.dart';
-import '../Colors/colors.dart';
+import '../../Bloc/Pokemon_Species_Bloc/pokemon_species_state.dart';
+import '../../Bloc/Pokemon_Species_Bloc/pokemon_spevies_bloc.dart';
+import '../../Colors/colors.dart';
+import '../Wigets/infomation_about_pokemon.dart';
 
 class PokemonDetails extends StatelessWidget {
   const PokemonDetails({Key? key,required this.pokemon}) : super(key: key);
@@ -39,7 +39,7 @@ final PokemonModel pokemon;
                             color: ColorsSet.black,
                           ));
                     } else if (state is PokemonSpeciesErrorState) {
-                      return Center(
+                      return const Center(
                           child: Text(
                               'Failed To Load Internet'
                           ));

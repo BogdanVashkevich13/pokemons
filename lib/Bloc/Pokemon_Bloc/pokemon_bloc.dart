@@ -13,8 +13,6 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   PokemonBloc({required this.repository}) : super(PokemonEmptyState()) {
     on<LoadPokemonEvent>((event, emit) async {
       emit(PokemonLoadingState());
-      print('loading');
-
       try {
         pokemonList = await repository.getPokemonList();
         emit(PokemonLoadedState(pokemon: pokemonList));

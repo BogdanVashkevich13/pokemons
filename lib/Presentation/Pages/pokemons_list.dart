@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc.dart';
@@ -6,10 +6,10 @@ import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc_event.dart';
 import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc_state.dart';
 import 'package:pokemons/Colors/colors.dart';
 import 'package:pokemons/Data/pokemon_repository.dart';
-import 'package:pokemons/Pages/pokemon_details.dart';
-import 'package:pokemons/Wigets/pokemon_cell.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Data/pokemon.dart';
+import 'package:pokemons/Presentation/Pages/pokemon_details.dart';
+
+import '../../Data/pokemon.dart';
 
 class PokemonList extends StatefulWidget {
   const PokemonList({Key? key}) : super(key: key);
@@ -20,7 +20,6 @@ class PokemonList extends StatefulWidget {
 
 class _PokeDex extends State<PokemonList> {
   final ScrollController _scrollController = ScrollController();
-  late PokemonBloc _pokemonBloc;
   final List<PokemonModel> pokemonList = [];
   bool loading = false, alLoaded =false;
 
@@ -128,7 +127,7 @@ class _PokeDex extends State<PokemonList> {
                         child:  Card(
                           elevation: 25,
                           color: ColorsSet.white,
-                          child: Container(
+                          child: SizedBox(
                             height: 450,
                             width: 300,
                             // color: Colors.red,
@@ -185,7 +184,7 @@ class _PokeDex extends State<PokemonList> {
                                 },
                                 child: Padding(padding: const EdgeInsets.all(5),
                                   child: Card(
-                                    color: ColorsSet.white,
+                                    color: ColorsSet.gray_text,
                                     child: GridTile(
                                         child: Column(
                                           children: <Widget>[
@@ -195,7 +194,14 @@ class _PokeDex extends State<PokemonList> {
                                                     .frontDefault),
                                             const SizedBox(height: 10,),
                                             Text(pokemonList[index].name
-                                                .toUpperCase())
+                                                .toUpperCase(),
+                                              style: GoogleFonts.lato(
+                                                textStyle:  const TextStyle(
+                                                  color: ColorsSet.black,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            )
                                           ],
                                         )
                                     ),
@@ -212,7 +218,7 @@ class _PokeDex extends State<PokemonList> {
       );
     }
     void scrolUp(){
-    final double start = 0;
+    const double start = 0;
     _scrollController.animateTo(start, duration: const Duration(seconds: 1), curve: Curves.easeIn);
     }
   }

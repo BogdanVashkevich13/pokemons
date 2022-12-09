@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'Pages/home_page.dart';
-import 'Pages/pokemon_details.dart';
-import 'package:pokemons/Colors/colors.dart';
+import 'Presentation/Pages/home_page.dart';
 
 void main()  {
   runApp(const MyApp());

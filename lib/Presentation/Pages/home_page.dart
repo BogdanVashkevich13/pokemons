@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemons/Bloc/Pokemon_Bloc/pokemon_bloc.dart';
 import 'package:pokemons/Bloc/Pokemon_Species_Bloc/pokemon_spevies_bloc.dart';
-import 'package:pokemons/Pages/pokemons_list.dart';
+import 'package:pokemons/Presentation/Pages/pokemons_list.dart';
 
-import '../Data/pokemon_repository.dart';
+import '../../Data/pokemon_repository.dart';
+
 
 
 class HomePage extends StatefulWidget {

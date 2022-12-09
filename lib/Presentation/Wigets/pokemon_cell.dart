@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:pokemons/Colors/colors.dart';
-
-import '../Data/pokemon.dart';
+import '../../Data/pokemon.dart';
 import '../Pages/pokemon_details.dart';
 
 class PokemonCell extends StatelessWidget {
@@ -34,15 +33,15 @@ class PokemonCell extends StatelessWidget {
                 // Navigator.pushNamed(context, '/PokeInfo',
                 // arguments: pokemonList[index].id);
               },
-              child: Padding(padding: EdgeInsets.all(5),
+              child: Padding(padding: const EdgeInsets.all(5),
                 child:  Card(
                   color: ColorsSet.white,
                   child: GridTile(
                       child: Column(
                         children: <Widget> [
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Image.network(pokemonList[index].sprites.frontDefault),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Text(pokemonList[index].name.toUpperCase())
                         ],
                       )
