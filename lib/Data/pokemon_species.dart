@@ -16,15 +16,15 @@ class PokemonSpecies {
   final String name;
 
   factory PokemonSpecies.fromJson(Map<String, dynamic> json) => PokemonSpecies(
-    baseHappiness: json["base_happiness"],
-    captureRate: json["capture_rate"],
-    growthRate: Color.fromJson(json["growth_rate"]),
-    flavorTextEntries: List<FlavorTextEntry>.from(
-        json["flavor_text_entries"]
-            .map((x) => FlavorTextEntry.fromJson(x))),
-    id: json["id"],
-    name: json["name"],
-  );
+        baseHappiness: json["base_happiness"],
+        captureRate: json["capture_rate"],
+        growthRate: Color.fromJson(json["growth_rate"]),
+        flavorTextEntries: List<FlavorTextEntry>.from(
+            json["flavor_text_entries"]
+                .map((x) => FlavorTextEntry.fromJson(x))),
+        id: json["id"],
+        name: json["name"],
+      );
 }
 
 class Color {
@@ -37,9 +37,9 @@ class Color {
   final String url;
 
   factory Color.fromJson(Map<String, dynamic> json) => Color(
-    name: json["name"],
-    url: json["url"],
-  );
+        name: json["name"],
+        url: json["url"],
+      );
 }
 
 class FlavorTextEntry {

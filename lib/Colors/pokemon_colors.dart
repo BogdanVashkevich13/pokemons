@@ -40,7 +40,6 @@ class PokemonColors {
   static const Color steelBackground = Color(0xFF4C91B2);
   static const Color waterBackground = Color(0xFF58ABF6);
 
-
   Color getPokemonColor(type) {
     switch (type) {
       case 'normal':

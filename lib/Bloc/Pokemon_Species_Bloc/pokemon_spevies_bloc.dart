@@ -9,13 +9,14 @@ class PokemonSpeciesBloc
     extends Bloc<PokemonSpeciesEvent, PokemonSpeciesState> {
   final PokemonRepository repository;
 
-  PokemonSpeciesBloc({required this.repository}) : super(PokemonSpeciesEmptyState()) {
+  PokemonSpeciesBloc({required this.repository})
+      : super(PokemonSpeciesEmptyState()) {
     on<LoadPokemonSpeciesEvent>((event, emit) async {
       emit(PokemonSpeciesLoadingState());
 
       try {
         final PokemonSpecies responsePokemon =
-        await repository.getPokemonSpecies(event.id);
+            await repository.getPokemonSpecies(event.id);
         emit(PokemonSpeciesLoadedState(pokemon: responsePokemon));
       } catch (e) {
         emit(PokemonSpeciesErrorState(e.toString()));

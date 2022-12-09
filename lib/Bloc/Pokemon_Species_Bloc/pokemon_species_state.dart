@@ -16,6 +16,7 @@ class PokemonSpeciesLoadingState extends PokemonSpeciesState {
 
 class PokemonSpeciesLoadedState extends PokemonSpeciesState {
   PokemonSpeciesLoadedState({required this.pokemon});
+
   final PokemonSpecies pokemon;
 
   @override

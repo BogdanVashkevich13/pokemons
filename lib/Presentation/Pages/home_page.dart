@@ -7,8 +7,6 @@ import 'package:pokemons/Presentation/Pages/pokemons_list.dart';
 
 import '../../Data/pokemon_repository.dart';
 
-
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -20,14 +18,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final pokemonRepository = PokemonRepository();
-    return MultiBlocProvider(providers: [
-      BlocProvider<PokemonBloc>(
-          create: (_) => PokemonBloc(repository: pokemonRepository)
-      ),
-      BlocProvider<PokemonSpeciesBloc>(
-          create: (_) => PokemonSpeciesBloc(repository: pokemonRepository)
-      )
-    ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PokemonBloc>(
+            create: (_) => PokemonBloc(repository: pokemonRepository)),
+        BlocProvider<PokemonSpeciesBloc>(
+            create: (_) => PokemonSpeciesBloc(repository: pokemonRepository))
+      ],
       child: const PokemonList(),
     );
   }

@@ -4,8 +4,7 @@ class PokemonResult {
   final String name;
   final String url;
 
-  factory PokemonResult.fromJson(Map<String, dynamic> json) =>
-      PokemonResult(
+  factory PokemonResult.fromJson(Map<String, dynamic> json) => PokemonResult(
         name: json['name'],
         url: json['url'],
       );

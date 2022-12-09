@@ -26,20 +26,20 @@ class PokemonModel {
   final List<GameIndex> gameIndices;
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) => PokemonModel(
-    abilities: List<Ability>.from(
-        json["abilities"].map((x) => Ability.fromJson(x))),
-    baseExperience: json["base_experience"],
-    gameIndices: List<GameIndex>.from(
-        json["game_indices"].map((x) => GameIndex.fromJson(x))),
-    height: json["height"],
-    id: json["id"],
-    name: json["name"],
-    species: Species.fromJson(json["species"]),
-    sprites: Sprites.fromJson(json["sprites"]),
-    stats: List<Stat>.from(json["stats"].map((x) => Stat.fromJson(x))),
-    types: List<Type>.from(json["types"].map((x) => Type.fromJson(x))),
-    weight: json["weight"],
-  );
+        abilities: List<Ability>.from(
+            json["abilities"].map((x) => Ability.fromJson(x))),
+        baseExperience: json["base_experience"],
+        gameIndices: List<GameIndex>.from(
+            json["game_indices"].map((x) => GameIndex.fromJson(x))),
+        height: json["height"],
+        id: json["id"],
+        name: json["name"],
+        species: Species.fromJson(json["species"]),
+        sprites: Sprites.fromJson(json["sprites"]),
+        stats: List<Stat>.from(json["stats"].map((x) => Stat.fromJson(x))),
+        types: List<Type>.from(json["types"].map((x) => Type.fromJson(x))),
+        weight: json["weight"],
+      );
 }
 
 class Ability {
@@ -54,10 +54,10 @@ class Ability {
   final int slot;
 
   factory Ability.fromJson(Map<String, dynamic> json) => Ability(
-    ability: Species.fromJson(json["ability"]),
-    isHidden: json["is_hidden"],
-    slot: json["slot"],
-  );
+        ability: Species.fromJson(json["ability"]),
+        isHidden: json["is_hidden"],
+        slot: json["slot"],
+      );
 }
 
 class Species {
@@ -70,9 +70,9 @@ class Species {
   final String url;
 
   factory Species.fromJson(Map<String, dynamic> json) => Species(
-    name: json["name"],
-    url: json["url"],
-  );
+        name: json["name"],
+        url: json["url"],
+      );
 }
 
 class GameIndex {
@@ -85,9 +85,9 @@ class GameIndex {
   final Species version;
 
   factory GameIndex.fromJson(Map<String, dynamic> json) => GameIndex(
-    gameIndex: json["game_index"],
-    version: Species.fromJson(json["version"]),
-  );
+        gameIndex: json["game_index"],
+        version: Species.fromJson(json["version"]),
+      );
 }
 
 class Sprites {
@@ -112,15 +112,15 @@ class Sprites {
   final dynamic frontShinyFemale;
 
   factory Sprites.fromJson(Map<String, dynamic> json) => Sprites(
-    backDefault: json["back_default"],
-    backFemale: json["back_female"],
-    backShiny: json["back_shiny"],
-    backShinyFemale: json["back_shiny_female"],
-    frontDefault: json["front_default"],
-    frontFemale: json["front_female"],
-    frontShiny: json["front_shiny"],
-    frontShinyFemale: json["front_shiny_female"],
-  );
+        backDefault: json["back_default"],
+        backFemale: json["back_female"],
+        backShiny: json["back_shiny"],
+        backShinyFemale: json["back_shiny_female"],
+        frontDefault: json["front_default"],
+        frontFemale: json["front_female"],
+        frontShiny: json["front_shiny"],
+        frontShinyFemale: json["front_shiny_female"],
+      );
 }
 
 class Stat {
@@ -135,10 +135,10 @@ class Stat {
   final Species stat;
 
   factory Stat.fromJson(Map<String, dynamic> json) => Stat(
-    baseStat: json["base_stat"],
-    effort: json["effort"],
-    stat: Species.fromJson(json["stat"]),
-  );
+        baseStat: json["base_stat"],
+        effort: json["effort"],
+        stat: Species.fromJson(json["stat"]),
+      );
 }
 
 class Type {
@@ -151,7 +151,7 @@ class Type {
   final Species type;
 
   factory Type.fromJson(Map<String, dynamic> json) => Type(
-    slot: json["slot"],
-    type: Species.fromJson(json["type"]),
-  );
+        slot: json["slot"],
+        type: Species.fromJson(json["type"]),
+      );
 }

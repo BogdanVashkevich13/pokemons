@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
+
 //import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:pokemons/Data/pokemon.dart';
 import 'package:pokemons/Data/pokemon_repository_interface.dart';
 import 'package:pokemons/Data/pokemon_result.dart';
 import 'package:pokemons/Data/pokemon_species.dart';
-
 
 class PokemonRepository extends InterfacePokemonRepository {
   static final Dio dio = Dio();
@@ -17,8 +17,9 @@ class PokemonRepository extends InterfacePokemonRepository {
       // Options myOptions = buildCacheOptions(const Duration(days: 30), forceRefresh: true);
       // dio.interceptors.add(dioCacheManager.interceptor);
 
-      Response response = await dio.get('$_baseApi?limit=10&offset=0',
-      // options: myOptions
+      Response response = await dio.get(
+        '$_baseApi?limit=100000&offset=0',
+        // options: myOptions
       );
 
       final pokemonResultResponse = response.data;

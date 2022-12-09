@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
-import '../../Data/pokemon.dart';
 
+import '../../Data/pokemon.dart';
 
 abstract class PokemonState extends Equatable {}
 
@@ -17,6 +16,7 @@ class PokemonLoadingState extends PokemonState {
 
 class PokemonLoadedState extends PokemonState {
   PokemonLoadedState({required this.pokemon});
+
   final List<PokemonModel> pokemon;
 
   @override
